@@ -25,15 +25,16 @@ void parse_value(char *source, int start, int end)
         cursor++;
     }
 
-//    char *key = malloc(cursor-start+1);
-//    snprintf(key, cursor-start+1, "%s", source+start);
-
     char *value = malloc(end-cursor);
     snprintf(value, end-cursor, "%s", source+cursor+1);
 
-//    printf("key=%s, value=%s\n", key, value);
-
     if (value[0] == '[') {
+        char *key = malloc(cursor-start+1);
+
+        snprintf(key, cursor-start+1, "%s", source+start);
+        printf("key=%s, value=%s\n", key, value);
+        free(key);
+
         int new_start = cursor+2;
         int new_end = end - 1;
 
